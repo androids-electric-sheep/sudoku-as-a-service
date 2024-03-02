@@ -1,0 +1,16 @@
+FROM python:3.12.2-alpine3.19 as base
+
+ENV PYTHONFAULTHANDLER=1 \
+    PYTHONHASHSEED=random \
+    PYTHONUNBUFFERED=1
+
+ENV PIP_DEFAULT_TIMEOUT=100 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_NO_CACHE_DIR=1 \
+    POETRY_VERSION=1.8.1
+
+WORKDIR /app
+RUN pip install "poetry==$POETRY_VERSION"
+COPY . .
+RUN poetry install
+CMD ["./docker-entrypoint.sh"]
