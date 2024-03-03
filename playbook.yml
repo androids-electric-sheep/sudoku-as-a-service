@@ -1,0 +1,27 @@
+---
+- name: Setup development machine
+  hosts: all
+  tasks:
+    - name: Install tools
+      become: true
+      ansible.builtin.package:
+        update_cache: true
+        name:
+          - gcc
+          - python3-pip
+          - pipx
+          - docker.io
+        state: present
+
+    - name: pipx ensurepath
+      ansible.builtin.command:
+        cmd: pipx ensurepath
+
+    - name: install peotry
+      ansible.builtin.command:
+        cmd: pipx install poetry
+
+    - name: install docker compose
+      ansible.builtin.script:
+        cmd: setup/install-compose.sh
+
