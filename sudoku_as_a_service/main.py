@@ -6,7 +6,6 @@ import random
 import structlog
 from fastapi import FastAPI, HTTPException, Response
 from prometheus_client import Counter, Summary, generate_latest
-from prometheus_client.openmetrics.exposition import CONTENT_TYPE_LATEST
 from redis import StrictRedis
 
 from sudoku_as_a_service import models, solver, utils
@@ -112,4 +111,4 @@ def metrics():
     """
     Provide metrics for prometheus to scrape for observability
     """
-    return Response(generate_latest(), headers={"Content-Type": CONTENT_TYPE_LATEST})
+    return Response(generate_latest(), headers={"Content-Type": "text/plain"})
