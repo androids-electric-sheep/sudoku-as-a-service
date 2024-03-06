@@ -17,7 +17,7 @@
       ansible.builtin.command:
         cmd: pipx ensurepath
 
-    - name: install peotry
+    - name: install poetry 
       ansible.builtin.command:
         cmd: pipx install poetry
 
