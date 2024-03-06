@@ -92,13 +92,14 @@ def submit_puzzle(puzzle: models.Puzzle) -> dict[str, str]:
     """
     Process a submission to solve a puzzle
     """
-    logger.info("Candidate solution propsed", id=puzzle.id)
+    logger.info("Candidate solution proposed", id=puzzle.id)
     cached_solution = redis_conn.get(puzzle.id)
     if not cached_solution:
         logger.error("Invalid puzzle ID provided, unable to continue", id=puzzle.id)
         raise HTTPException(status_code=404, detail="Puzzle ID not recognised")
 
     proposed_solution = utils.convert_puzzle_to_string(puzzle.puzzle)
+    logger.debug('Solution details', proposed=proposed_solution, cached=cached_solution)
     if proposed_solution == cached_solution:
         logger.info("Solution is valid", id=puzzle.id)
         return {"status": "correct"}
