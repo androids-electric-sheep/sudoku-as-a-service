@@ -24,4 +24,3 @@
     - name: install docker compose
       ansible.builtin.script:
         cmd: setup/install-compose.sh
-

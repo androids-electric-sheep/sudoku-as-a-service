@@ -97,9 +97,10 @@ def submit_puzzle(puzzle: models.Puzzle) -> dict[str, str]:
     if not cached_solution:
         logger.error("Invalid puzzle ID provided, unable to continue", id=puzzle.id)
         raise HTTPException(status_code=404, detail="Puzzle ID not recognised")
+    cached_solution = cached_solution.decode("utf-8")
 
     proposed_solution = utils.convert_puzzle_to_string(puzzle.puzzle)
-    logger.debug('Solution details', proposed=proposed_solution, cached=cached_solution)
+    logger.debug("Solution details", proposed=proposed_solution, cached=cached_solution)
     if proposed_solution == cached_solution:
         logger.info("Solution is valid", id=puzzle.id)
         return {"status": "correct"}
