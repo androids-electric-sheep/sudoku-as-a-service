@@ -1,3 +1,8 @@
+"""
+Solver code borrowed from https://www.askpython.com/python/examples/sudoku-solver-in-python as the point was the API and infrastructure
+"""
+
+
 M = 9
 
 
